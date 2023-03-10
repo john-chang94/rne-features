@@ -32,30 +32,18 @@ export default {
           autoVerify: true,
           data: [
             {
-              scheme: "rnefeatures://",
-              host: "*johnchang.me",
-              pathPrefix: "/pros"
-            },
-            {
-              scheme: "rnefeatures://",
-              host: "*.johnchang.me",
-              pathPrefix: "/pros"
-            },
-            {
               scheme: "https://",
               host: "*johnchang.me",
-              pathPrefix: "/pros"
             },
             {
               scheme: "https://",
               host: "*.johnchang.me",
-              pathPrefix: "/pros"
             },
           ],
           category: ["BROWSABLE", "DEFAULT"],
         },
       ],
-      versionCode: 2,
+      versionCode: 3,
     },
     web: {
       favicon: "./assets/favicon.png"
