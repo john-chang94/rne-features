@@ -52,36 +52,36 @@ const BottomTabNavigator = () => {
 
   const handleDeepLink = async (url: any) => {
     const { path, queryParams } = Linking.parse(url);
-    console.log("PARSED LINK", JSON.stringify(Linking.parse(url), null, 2));
 
-    // addSuggestedCategory({ parsedUrl: Linking.parse(url) });
-
-    if (path && queryParams) {
-      navigation.navigate(path, { proId: queryParams.proId });
+    if (!isLoading) {
+      if (path && queryParams) {
+        navigation.navigate(path, { proId: queryParams.proId });
+      }
     }
   };
 
   useEffect(() => {
     (async () => {
       const init = await Linking.getInitialURL();
-      console.log("INITIAL URL", init);
-      //   addSuggestedCategory({ initialUrl: init });
       if (init !== null) {
+        setIsLoading(false);
         handleDeepLink(init);
       }
-      if (navigationRef.isReady()) {
+      if (navigationRef.current?.getRootState().index === 0) {
         setIsLoading(false);
       }
     })();
+  }, [navigationRef.current]);
 
-    const subscription = Linking.addEventListener("url", (e) =>
-      handleDeepLink(e.url)
-    );
+  useEffect(() => {
+    const subscription = Linking.addEventListener("url", (e) => {
+      handleDeepLink(e.url);
+    });
 
     return () => {
       subscription.remove();
     };
-  }, [navigationRef]);
+  }, []);
 
   if (isLoading) return null;
 

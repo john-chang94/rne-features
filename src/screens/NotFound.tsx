@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function NotFound() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Oops! Screen not found :(</Text>
     </View>
   )

@@ -33,21 +33,29 @@ export default {
           data: [
             {
               scheme: "rnefeatures://",
-              host: "johnchang.me"
+              host: "*johnchang.me",
+              pathPrefix: "/pros"
+            },
+            {
+              scheme: "rnefeatures://",
+              host: "*.johnchang.me",
+              pathPrefix: "/pros"
             },
             {
               scheme: "https://",
-              host: "*johnchang.me"
+              host: "*johnchang.me",
+              pathPrefix: "/pros"
             },
             {
               scheme: "https://",
               host: "*.johnchang.me",
+              pathPrefix: "/pros"
             },
           ],
           category: ["BROWSABLE", "DEFAULT"],
         },
       ],
-      versionCode: 1,
+      versionCode: 2,
     },
     web: {
       favicon: "./assets/favicon.png"
