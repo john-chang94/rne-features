@@ -43,7 +43,7 @@ export default {
           category: ["BROWSABLE", "DEFAULT"],
         },
       ],
-      versionCode: 3,
+      versionCode: 4,
     },
     web: {
       favicon: "./assets/favicon.png"

@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,  Button } from "react-native";
 import { useState, useEffect } from "react";
 import * as Linking from "expo-linking";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [initialUrl, setInitialUrl] = useState("");
   const [parsedUrl, setParsedUrl] = useState("");
 
@@ -32,6 +32,7 @@ export default function HomeScreen() {
       <Text style={{ marginVertical: 10 }}>Home</Text>
       <Text style={{ marginVertical: 10 }}>INITIAL URL: {initialUrl}</Text>
       <Text style={{ marginVertical: 10 }}>PARSED URL: {parsedUrl}</Text>
+      <Button title="TESTING" onPress={() => navigation.navigate("NotFound")} />
     </View>
   );
 }

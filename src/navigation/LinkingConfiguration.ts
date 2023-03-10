@@ -4,6 +4,7 @@ import * as Linking from "expo-linking";
 const linking = {
   prefixes: [
     Linking.createURL("/"),
+    "rnefeatures://",
     "https://johnchang.me",
     "https://*.johnchang.me",
   ],
@@ -28,7 +29,7 @@ const linking = {
           },
         },
       },
-      NotFound: "*",
+      NotFound: "NotFound",
     },
   },
 };

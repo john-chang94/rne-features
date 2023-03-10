@@ -3,6 +3,7 @@ import CameraScreen from "../features/camera/CameraScreen";
 import CameraShutterScreen from "../features/camera/CameraShutterScreen";
 import NotificationsScreen from "../features/notifications/NotificationsScreen";
 import Home from "../screens/HomeScreen";
+import NotFound from "../screens/NotFound";
 import ProDetails from "../screens/ProDetails";
 
 export default function HomeStack() {
@@ -33,6 +34,11 @@ export default function HomeStack() {
         name="ProDetails"
         component={ProDetails}
         options={{ title: "Pro Details" }}
+      />
+      <Stack.Screen
+        name="NotFound"
+        component={NotFound}
+        options={{ title: "Not Found" }}
       />
     </Stack.Navigator>
   );
