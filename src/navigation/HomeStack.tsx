@@ -35,11 +35,6 @@ export default function HomeStack() {
         component={ProDetails}
         options={{ title: "Pro Details" }}
       />
-      <Stack.Screen
-        name="NotFound"
-        component={NotFound}
-        options={{ title: "Not Found" }}
-      />
     </Stack.Navigator>
   );
 }

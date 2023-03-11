@@ -51,27 +51,13 @@ const BottomTabNavigator = () => {
   const navigation = useNavigation();
 
   const handleDeepLink = async (url: any) => {
-    const { path, queryParams } = Linking.parse(url);
-
     if (!isLoading) {
+      const { path, queryParams } = Linking.parse(url);
       if (path && queryParams) {
         navigation.navigate(path, { proId: queryParams.proId });
       }
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      const init = await Linking.getInitialURL();
-      if (init !== null) {
-        setIsLoading(false);
-        handleDeepLink(init);
-      }
-      if (navigationRef.current?.getRootState().index === 0) {
-        setIsLoading(false);
-      }
-    })();
-  }, [navigationRef.current]);
 
   useEffect(() => {
     const subscription = Linking.addEventListener("url", (e) => {
@@ -82,6 +68,18 @@ const BottomTabNavigator = () => {
       subscription.remove();
     };
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      const init = await Linking.getInitialURL();
+      if (init !== null) {
+        if (navigationRef.current?.getRootState().index === 0) {
+          setIsLoading(false);
+          handleDeepLink(init);
+        }
+      }
+    })();
+  }, [navigationRef.current]);
 
   if (isLoading) return null;
 

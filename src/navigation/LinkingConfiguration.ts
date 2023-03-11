@@ -29,7 +29,7 @@ const linking = {
           },
         },
       },
-      NotFound: "NotFound",
+      NotFound: "*",
     },
   },
 };
