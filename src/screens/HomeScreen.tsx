@@ -8,6 +8,11 @@ export default function HomeScreen({ navigation }: any) {
 
   const handleDeepLink = async (url: any) => {
     setParsedUrl(JSON.stringify(Linking.parse(url), null, 2));
+    const { path, queryParams } = Linking.parse(url);
+      if (path && queryParams) {
+        console.log('HOME NAV RAN')
+        navigation.navigate(path, queryParams);
+      }
   };
 
   useEffect(() => {
@@ -26,6 +31,7 @@ export default function HomeScreen({ navigation }: any) {
       const url = Linking.parse(e.url);
       setParsedUrl(JSON.stringify(url, null, 2));
       setInitialUrl(null);
+      handleDeepLink(e.url);
     });
 
     return () => {

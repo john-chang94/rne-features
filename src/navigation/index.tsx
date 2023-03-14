@@ -56,18 +56,18 @@ const BottomTabNavigator = () => {
 
   const handleDeepLink = async (url: any) => {
     // if (!isLoading) {
-      const { path, queryParams } = Linking.parse(url);
-      if (path && queryParams) {
-        navigation.navigate(path, { proId: queryParams.proId });
-      }
+    const { path, queryParams } = Linking.parse(url);
+    if (path && queryParams) {
+      navigation.navigate(path, { proId: queryParams.proId });
+    }
     // }
   };
 
   useEffect(() => {
-    const subscription = Linking.addEventListener("url", (e) => {
-      setUrl(e.url);
+    const subscription = Linking.addEventListener("url", (e) => 
+      setUrl(e.url)
       // handleDeepLink(e.url);
-    });
+    );
 
     return () => {
       subscription.remove();
@@ -87,12 +87,14 @@ const BottomTabNavigator = () => {
     (async () => {
       const init = await Linking.getInitialURL();
       if (navigationRef.current?.getRootState().index === 0) {
-        setIsLoading(false);
         if (init !== null) {
           // handleDeepLink(init);
-          setUrl(init);
+          setTimeout(() => {
+            setUrl(init);
+          }, 150);
         }
       }
+      setIsLoading(false);
     })();
   }, [navigationRef.current]);
 

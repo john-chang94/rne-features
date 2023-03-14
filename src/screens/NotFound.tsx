@@ -13,10 +13,12 @@ export default function NotFound({ navigation }: any) {
       ...prev,
       JSON.stringify(Linking.parse(url), null, 2),
     ]);
-    // const { path, queryParams } = Linking.parse(url);
-    // if (path && queryParams) {
-    //   navigation.navigate(path, queryParams);
-    // }
+    const { path, queryParams } = Linking.parse(url);
+    if (path && queryParams) {
+      setIsLoading(false);
+      console.log('NOT FOUND NAV RAN')
+      navigation.navigate(path, queryParams);
+    }
   };
 
   useEffect(() => {
