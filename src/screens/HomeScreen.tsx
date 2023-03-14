@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import * as Linking from "expo-linking";
 
 export default function HomeScreen({ navigation }: any) {
-  const [initialUrl, setInitialUrl] = useState("");
+  const [initialUrl, setInitialUrl] = useState<string | null>(null);
   const [parsedUrl, setParsedUrl] = useState("");
 
   const handleDeepLink = async (url: any) => {
@@ -20,6 +20,19 @@ export default function HomeScreen({ navigation }: any) {
     })();
 
   }, []);
+
+  useEffect(() => {
+    const subscription = Linking.addEventListener("url", (e) => {
+      const url = Linking.parse(e.url);
+      setParsedUrl(JSON.stringify(url, null, 2));
+      setInitialUrl(null);
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={{ marginVertical: 10 }}>Home</Text>

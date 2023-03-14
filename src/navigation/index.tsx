@@ -4,6 +4,7 @@ import {
   createNavigationContainerRef,
   NavigationContainer,
   useNavigation,
+  useIsFocused,
 } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -45,23 +46,27 @@ export default function Navigation() {
 
 const BottomTabNavigator = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [url, setUrl] = useState<string | null>(null);
 
   const BottomTab = createBottomTabNavigator();
 
   const navigation = useNavigation();
 
+  const isFocused = useIsFocused();
+
   const handleDeepLink = async (url: any) => {
-    if (!isLoading) {
+    // if (!isLoading) {
       const { path, queryParams } = Linking.parse(url);
       if (path && queryParams) {
         navigation.navigate(path, { proId: queryParams.proId });
       }
-    }
+    // }
   };
 
   useEffect(() => {
     const subscription = Linking.addEventListener("url", (e) => {
-      handleDeepLink(e.url);
+      setUrl(e.url);
+      // handleDeepLink(e.url);
     });
 
     return () => {
@@ -70,12 +75,22 @@ const BottomTabNavigator = () => {
   }, []);
 
   useEffect(() => {
+    if (url !== null) {
+      const { path, queryParams } = Linking.parse(url);
+      if (path && queryParams) {
+        navigation.navigate(path, queryParams);
+      }
+    }
+  }, [url]);
+
+  useEffect(() => {
     (async () => {
       const init = await Linking.getInitialURL();
-      if (init !== null) {
-        if (navigationRef.current?.getRootState().index === 0) {
-          setIsLoading(false);
-          handleDeepLink(init);
+      if (navigationRef.current?.getRootState().index === 0) {
+        setIsLoading(false);
+        if (init !== null) {
+          // handleDeepLink(init);
+          setUrl(init);
         }
       }
     })();
