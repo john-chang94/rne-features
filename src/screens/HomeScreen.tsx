@@ -7,20 +7,22 @@ export default function HomeScreen({ navigation }: any) {
   const [parsedUrl, setParsedUrl] = useState("");
 
   const handleDeepLink = async (url: any) => {
-    setParsedUrl(JSON.stringify(Linking.parse(url), null, 2));
     const { path, queryParams } = Linking.parse(url);
-      if (path && queryParams) {
-        console.log('HOME NAV RAN')
-        navigation.navigate(path, queryParams);
-      }
+    if (path && queryParams) {
+      console.log("HOME NAV RAN");
+      navigation.navigate(path, queryParams);
+    }
   };
 
   useEffect(() => {
     (async () => {
       const init = await Linking.getInitialURL();
       if (init !== null) {
+        setParsedUrl(JSON.stringify(Linking.parse(init), null, 2));
         setInitialUrl(init);
-        handleDeepLink(init);
+        setTimeout(() => {
+          handleDeepLink(init);
+        }, 2500);
       }
     })();
   }, []);
@@ -30,12 +32,14 @@ export default function HomeScreen({ navigation }: any) {
       const url = Linking.parse(e.url);
       setParsedUrl(JSON.stringify(url, null, 2));
       setInitialUrl(null);
-      handleDeepLink(e.url);
+      setTimeout(() => {
+        handleDeepLink(e.url);
+      }, 2500);
     });
 
-    return () => {
-      subscription.remove();
-    };
+    // return () => {
+    //   subscription.remove();
+    // };
   }, []);
 
   return (
