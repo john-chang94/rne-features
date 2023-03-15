@@ -28,6 +28,7 @@ export default function NotFound({ navigation }: any) {
     if (path && queryParams) {
       setPath(path);
       setQueryParams(queryParams);
+      Alert.alert("NOT FOUND NAV RAN")
       console.log("NOT FOUND NAV RAN");
       // setTimeout(() => {
       setIsLoading(false);

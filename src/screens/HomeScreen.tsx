@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Alert } from "react-native";
 import { useState, useEffect } from "react";
 import * as Linking from "expo-linking";
 
@@ -10,6 +10,7 @@ export default function HomeScreen({ navigation }: any) {
     const { path, queryParams } = Linking.parse(url);
     if (path && queryParams) {
       console.log("HOME NAV RAN");
+      Alert.alert("HOME NAV RAN")
       setTimeout(() => {
         navigation.navigate(path, queryParams);
       }, 500);
