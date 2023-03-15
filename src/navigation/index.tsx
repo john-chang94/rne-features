@@ -91,10 +91,10 @@ const BottomTabNavigator = () => {
       if (navigationRef.current?.getRootState().index === 0) {
         if (init !== null) {
           // handleDeepLink(init);
-          // setTimeout(() => {
+          setTimeout(() => {
             // setUrl(init);
             handleDeepLink(init);
-          // }, 150);
+          }, 200);
         }
       }
       // setIsLoading(false);

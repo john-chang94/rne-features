@@ -29,7 +29,7 @@ export default function NotFound({ navigation }: any) {
       setPath(path);
       setQueryParams(queryParams);
       console.log("NOT FOUND NAV RAN");
-      navigation.navigate(path, queryParams);
+      navigation.navigate("Home", { screen: path, params: queryParams });
     }
   };
 
