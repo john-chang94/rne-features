@@ -12,6 +12,7 @@ export default function HomeScreen({ navigation }: any) {
       if (path && queryParams) {
         console.log('HOME NAV RAN')
         navigation.navigate(path, queryParams);
+        // Linking.openURL(url);
       }
   };
 
@@ -23,21 +24,20 @@ export default function HomeScreen({ navigation }: any) {
         handleDeepLink(init);
       }
     })();
-
   }, []);
 
-  useEffect(() => {
-    const subscription = Linking.addEventListener("url", (e) => {
-      const url = Linking.parse(e.url);
-      setParsedUrl(JSON.stringify(url, null, 2));
-      setInitialUrl(null);
-      handleDeepLink(e.url);
-    });
+  // useEffect(() => {
+  //   const subscription = Linking.addEventListener("url", (e) => {
+  //     const url = Linking.parse(e.url);
+  //     setParsedUrl(JSON.stringify(url, null, 2));
+  //     setInitialUrl(null);
+  //     handleDeepLink(e.url);
+  //   });
 
-    return () => {
-      subscription.remove();
-    };
-  }, []);
+  //   return () => {
+  //     subscription.remove();
+  //   };
+  // }, []);
 
   return (
     <View style={styles.container}>

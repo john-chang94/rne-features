@@ -27,7 +27,7 @@ export default function Navigation() {
         ref={navigationRef}
         fallback={<Text>Loading...</Text>}
       >
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Root">
           <Stack.Screen
             name="Root"
             component={BottomTabNavigator}
@@ -59,14 +59,16 @@ const BottomTabNavigator = () => {
     const { path, queryParams } = Linking.parse(url);
     if (path && queryParams) {
       navigation.navigate(path, { proId: queryParams.proId });
+      console.log('INDEX DEEP LINK RAN')
+      // Linking.openURL(url);
     }
     // }
   };
 
   useEffect(() => {
     const subscription = Linking.addEventListener("url", (e) => 
-      setUrl(e.url)
-      // handleDeepLink(e.url);
+      // setUrl(e.url)
+      handleDeepLink(e.url)
     );
 
     return () => {
@@ -74,14 +76,14 @@ const BottomTabNavigator = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (url !== null) {
-      const { path, queryParams } = Linking.parse(url);
-      if (path && queryParams) {
-        navigation.navigate(path, queryParams);
-      }
-    }
-  }, [url]);
+  // useEffect(() => {
+  //   if (url !== null) {
+  //     const { path, queryParams } = Linking.parse(url);
+  //     if (path && queryParams) {
+  //       // navigation.navigate(path, queryParams);
+  //     }
+  //   }
+  // }, [url]);
 
   useEffect(() => {
     (async () => {
@@ -90,8 +92,9 @@ const BottomTabNavigator = () => {
         if (init !== null) {
           // handleDeepLink(init);
           setTimeout(() => {
-            setUrl(init);
-          }, 250);
+            // setUrl(init);
+            handleDeepLink(init);
+          }, 150);
         }
       }
       // setIsLoading(false);

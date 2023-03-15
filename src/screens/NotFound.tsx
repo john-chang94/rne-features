@@ -6,34 +6,32 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 export default function NotFound({ navigation }: any) {
   const [initialUrl, setInitialUrl] = useState([""]);
   const [parsedUrl, setParsedUrl] = useState([""]);
-  const [url, setUrl] = useState("");
+  const [path, setPath] = useState("");
+  const [queryParams, setQueryParams] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const onPressHome = () => {
     navigation.replace("Root");
-  }
+  };
+
+  const onPressPro = () => {
+    navigation.navigate(path, queryParams);
+  };
 
   const handleDeepLink = async (url: any) => {
     setParsedUrl((prev: any) => [
       ...prev,
       JSON.stringify(Linking.parse(url), null, 2),
     ]);
-    setUrl(url);
     const { path, queryParams } = Linking.parse(url);
     // setIsLoading(false);
     if (path && queryParams) {
-      console.log('NOT FOUND NAV RAN')
+      setPath(path);
+      setQueryParams(queryParams);
+      console.log("NOT FOUND NAV RAN");
       navigation.navigate(path, queryParams);
     }
   };
-
-  useEffect(() => {
-    const { path, queryParams } = Linking.parse(url);
-    if (path && queryParams) {
-      console.log('NOT FOUND URL USEEFFECT RAN')
-      navigation.navigate(path, queryParams);
-    }
-  }, [url])
 
   useEffect(() => {
     (async () => {
@@ -43,7 +41,9 @@ export default function NotFound({ navigation }: any) {
         handleDeepLink(init);
       }
     })();
+  }, []);
 
+  useEffect(() => {
     const subscription = Linking.addEventListener("url", (e) =>
       handleDeepLink(e.url)
     );
@@ -54,7 +54,7 @@ export default function NotFound({ navigation }: any) {
   }, []);
 
   // if (isLoading) return null;
-  
+
   return (
     <KeyboardAwareScrollView style={styles.container}>
       <Text style={{ marginVertical: 10 }}>Oops! Screen not found :(</Text>
@@ -64,7 +64,13 @@ export default function NotFound({ navigation }: any) {
       {parsedUrl.map((item: any) => (
         <Text style={{ marginVertical: 10 }}>PARSED URL: {item}</Text>
       ))}
+      <Text style={{ marginVertical: 10 }}>PATH: {path}</Text>
+      <Text style={{ marginVertical: 10 }}>
+        QUERY PARAMS: {JSON.stringify(queryParams)}
+      </Text>
       <Button title="HOME" onPress={onPressHome} />
+      <View style={{ marginVertical: 15 }} />
+      <Button title="PRO DETAILS" onPress={onPressPro} />
     </KeyboardAwareScrollView>
   );
 }
@@ -74,6 +80,6 @@ const styles = StyleSheet.create({
     // flex: 1,
     // justifyContent: "center",
     // alignItems: "center",
-    padding: 35
+    padding: 35,
   },
 });
