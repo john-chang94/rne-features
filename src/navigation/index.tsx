@@ -4,7 +4,6 @@ import {
   createNavigationContainerRef,
   NavigationContainer,
   useNavigation,
-  useIsFocused,
 } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -45,63 +44,42 @@ export default function Navigation() {
 }
 
 const BottomTabNavigator = () => {
-  // const [isLoading, setIsLoading] = useState(true);
-  const [url, setUrl] = useState<string | null>(null);
-
   const BottomTab = createBottomTabNavigator();
 
   const navigation = useNavigation();
 
-  const isFocused = useIsFocused();
-
-  const handleDeepLink = async (url: any) => {
-    // if (!isLoading) {
-    const { path, queryParams } = Linking.parse(url);
-    if (path && queryParams) {
-      navigation.navigate("Home", { screen: path, params: queryParams });
-      console.log('INDEX DEEP LINK RAN')
-      // Linking.openURL(url);
-    }
-    // }
-  };
-
-  useEffect(() => {
-    const subscription = Linking.addEventListener("url", (e) => 
-      // setUrl(e.url)
-      handleDeepLink(e.url)
-    );
-
-    return () => {
-      subscription.remove();
-    };
-  }, []);
+  // const handleDeepLink = async (url: any) => {
+  //   const { path, queryParams } = Linking.parse(url);
+  //   if (path && queryParams) {
+  //     navigation.navigate("Home", { screen: path, params: queryParams });
+  //     console.log("INDEX DEEP LINK RAN");
+  //   }
+  // };
 
   // useEffect(() => {
-  //   if (url !== null) {
-  //     const { path, queryParams } = Linking.parse(url);
-  //     if (path && queryParams) {
-  //       // navigation.navigate(path, queryParams);
+  //   const subscription = Linking.addEventListener("url", (e) =>
+  //     setTimeout(() => {
+  //       handleDeepLink(e.url);
+  //     }, 2000)
+  //   );
+
+  //   return () => {
+  //     subscription.remove();
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     const init = await Linking.getInitialURL();
+  //     if (navigationRef.current?.getRootState().index === 0) {
+  //       if (init !== null) {
+  //         setTimeout(() => {
+  //           handleDeepLink(init);
+  //         }, 1000);
+  //       }
   //     }
-  //   }
-  // }, [url]);
-
-  useEffect(() => {
-    (async () => {
-      const init = await Linking.getInitialURL();
-      if (navigationRef.current?.getRootState().index === 0) {
-        if (init !== null) {
-          // handleDeepLink(init);
-          setTimeout(() => {
-            // setUrl(init);
-            handleDeepLink(init);
-          }, 200);
-        }
-      }
-      // setIsLoading(false);
-    })();
-  }, [navigationRef.current]);
-
-  // if (isLoading) return null;
+  //   })();
+  // }, [navigationRef.current]);
 
   return (
     <BottomTab.Navigator initialRouteName="Home">
