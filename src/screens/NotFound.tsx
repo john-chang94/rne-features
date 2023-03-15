@@ -43,7 +43,9 @@ export default function NotFound({ navigation }: any) {
       if (init !== null) {
         setInitialUrl((prev: any) => [...prev, init]);
         setTimeout(() => {
-          handleDeepLink(init);
+          // handleDeepLink(init);
+          setIsLoading(false);
+          navigation.replace("Root");
         }, 500);
       }
     })();
