@@ -1,9 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, Text, View } from 'react-native'
 
-export default function SettingsScreen() {
+export default function SettingsScreen({ navigation }: any) {
+  const onPressHome = () => {
+    navigation.replace("Root");
+  }
   return (
     <View style={styles.container}>
       <Text>Settings</Text>
+      <Button title="HOME" onPress={onPressHome} />
     </View>
   )
 }

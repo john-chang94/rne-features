@@ -45,7 +45,7 @@ export default function Navigation() {
 }
 
 const BottomTabNavigator = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [url, setUrl] = useState<string | null>(null);
 
   const BottomTab = createBottomTabNavigator();
@@ -91,14 +91,14 @@ const BottomTabNavigator = () => {
           // handleDeepLink(init);
           setTimeout(() => {
             setUrl(init);
-          }, 150);
+          }, 250);
         }
       }
-      setIsLoading(false);
+      // setIsLoading(false);
     })();
   }, [navigationRef.current]);
 
-  if (isLoading) return null;
+  // if (isLoading) return null;
 
   return (
     <BottomTab.Navigator initialRouteName="Home">
