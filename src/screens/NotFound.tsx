@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View, Alert } from "react-native";
 import { useState, useEffect } from "react";
 import * as Linking from "expo-linking";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -15,6 +15,7 @@ export default function NotFound({ navigation }: any) {
   };
 
   const onPressPro = () => {
+    Alert.alert("", `${path} ${queryParams}`)
     navigation.navigate("Home", { screen: path, params: queryParams });
   };
 
@@ -24,15 +25,14 @@ export default function NotFound({ navigation }: any) {
       JSON.stringify(Linking.parse(url), null, 2),
     ]);
     const { path, queryParams } = Linking.parse(url);
-    // setIsLoading(false);
     if (path && queryParams) {
       setPath(path);
       setQueryParams(queryParams);
       console.log("NOT FOUND NAV RAN");
-      setTimeout(() => {
-        setIsLoading(false);
-        navigation.navigate("Home", { screen: path, params: queryParams });
-      }, 500);
+      // setTimeout(() => {
+      setIsLoading(false);
+      navigation.navigate("Home", { screen: path, params: queryParams });
+      // }, 500);
     }
   };
 
@@ -41,15 +41,19 @@ export default function NotFound({ navigation }: any) {
       const init = await Linking.getInitialURL();
       if (init !== null) {
         setInitialUrl((prev: any) => [...prev, init]);
-        handleDeepLink(init);
+        setTimeout(() => {
+          handleDeepLink(init);
+        }, 500);
       }
     })();
   }, []);
 
   useEffect(() => {
-    const subscription = Linking.addEventListener("url", (e) =>
-      handleDeepLink(e.url)
-    );
+    const subscription = Linking.addEventListener("url", (e) => {
+      setTimeout(() => {
+        handleDeepLink(e.url);
+      }, 500);
+    });
 
     return () => {
       subscription.remove();
