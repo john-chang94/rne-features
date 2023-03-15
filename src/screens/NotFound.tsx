@@ -29,7 +29,10 @@ export default function NotFound({ navigation }: any) {
       setPath(path);
       setQueryParams(queryParams);
       console.log("NOT FOUND NAV RAN");
-      // navigation.navigate("Home", { screen: path, params: queryParams });
+      setTimeout(() => {
+        setIsLoading(false);
+        navigation.navigate("Home", { screen: path, params: queryParams });
+      }, 500);
     }
   };
 
@@ -53,7 +56,7 @@ export default function NotFound({ navigation }: any) {
     };
   }, []);
 
-  // if (isLoading) return null;
+  if (isLoading) return <Text>Loading...</Text>;
 
   return (
     <KeyboardAwareScrollView style={styles.container}>

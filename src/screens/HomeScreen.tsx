@@ -10,7 +10,9 @@ export default function HomeScreen({ navigation }: any) {
     const { path, queryParams } = Linking.parse(url);
     if (path && queryParams) {
       console.log("HOME NAV RAN");
-      navigation.navigate(path, queryParams);
+      setTimeout(() => {
+        navigation.navigate(path, queryParams);
+      }, 500);
     }
   };
 
@@ -20,9 +22,9 @@ export default function HomeScreen({ navigation }: any) {
       if (init !== null) {
         setParsedUrl(JSON.stringify(Linking.parse(init), null, 2));
         setInitialUrl(init);
-        setTimeout(() => {
+        // setTimeout(() => {
           handleDeepLink(init);
-        }, 2500);
+        // }, 500);
       }
     })();
   }, []);
@@ -32,14 +34,14 @@ export default function HomeScreen({ navigation }: any) {
       const url = Linking.parse(e.url);
       setParsedUrl(JSON.stringify(url, null, 2));
       setInitialUrl(null);
-      setTimeout(() => {
+      // setTimeout(() => {
         handleDeepLink(e.url);
-      }, 2500);
+      // }, 500);
     });
 
-    // return () => {
-    //   subscription.remove();
-    // };
+    return () => {
+      subscription.remove();
+    };
   }, []);
 
   return (
