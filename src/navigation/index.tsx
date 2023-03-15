@@ -58,7 +58,7 @@ const BottomTabNavigator = () => {
     // if (!isLoading) {
     const { path, queryParams } = Linking.parse(url);
     if (path && queryParams) {
-      navigation.navigate(path, { proId: queryParams.proId });
+      navigation.navigate("Home", { screen: path, params: queryParams });
       console.log('INDEX DEEP LINK RAN')
       // Linking.openURL(url);
     }
@@ -91,10 +91,10 @@ const BottomTabNavigator = () => {
       if (navigationRef.current?.getRootState().index === 0) {
         if (init !== null) {
           // handleDeepLink(init);
-          setTimeout(() => {
+          // setTimeout(() => {
             // setUrl(init);
             handleDeepLink(init);
-          }, 150);
+          // }, 150);
         }
       }
       // setIsLoading(false);

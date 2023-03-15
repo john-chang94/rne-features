@@ -15,7 +15,7 @@ export default function NotFound({ navigation }: any) {
   };
 
   const onPressPro = () => {
-    navigation.navigate(path, queryParams);
+    navigation.navigate("Home", { screen: path, params: queryParams });
   };
 
   const handleDeepLink = async (url: any) => {

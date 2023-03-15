@@ -16,15 +16,15 @@ export default function HomeScreen({ navigation }: any) {
       }
   };
 
-  useEffect(() => {
-    (async () => {
-      const init = await Linking.getInitialURL();
-      if (init !== null) {
-        setInitialUrl(init);
-        handleDeepLink(init);
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const init = await Linking.getInitialURL();
+  //     if (init !== null) {
+  //       setInitialUrl(init);
+  //       handleDeepLink(init);
+  //     }
+  //   })();
+  // }, []);
 
   // useEffect(() => {
   //   const subscription = Linking.addEventListener("url", (e) => {
