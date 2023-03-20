@@ -32,18 +32,18 @@ export default {
           autoVerify: true,
           data: [
             {
-              scheme: "https://",
+              scheme: "https",
               host: "*johnchang.me",
             },
             {
-              scheme: "https://",
+              scheme: "https",
               host: "*.johnchang.me",
             },
           ],
           category: ["BROWSABLE", "DEFAULT"],
         },
       ],
-      versionCode: 17,
+      versionCode: 18,
     },
     web: {
       favicon: "./assets/favicon.png"

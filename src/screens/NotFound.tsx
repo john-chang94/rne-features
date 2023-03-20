@@ -42,7 +42,7 @@ export default function NotFound({ navigation }: any) {
           // handleDeepLink(init);
           setIsLoading(false);
           navigation.replace("Root");
-        }, 200);
+        }, 150);
       }
     })();
   }, []);
