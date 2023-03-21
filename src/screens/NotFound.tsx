@@ -43,6 +43,8 @@ export default function NotFound({ navigation }: any) {
           setIsLoading(false);
           navigation.replace("Root");
         }, 150);
+      } else {
+        setIsLoading(false);
       }
     })();
   }, []);

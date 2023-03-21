@@ -18,7 +18,7 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: "com.rnefeatures.dev",
-      associatedDomains: ["applinks:johnchang.me"],
+      associatedDomains: ["applinks:obdeeplink.netlify.app"],
     },
     android: {
       adaptiveIcon: {
@@ -33,17 +33,17 @@ export default {
           data: [
             {
               scheme: "https",
-              host: "*johnchang.me",
+              host: "*obdeeplink.netlify.app",
             },
             {
               scheme: "https",
-              host: "*.johnchang.me",
+              host: "*.obdeeplink.netlify.app",
             },
           ],
           category: ["BROWSABLE", "DEFAULT"],
         },
       ],
-      versionCode: 18,
+      versionCode: 19,
     },
     web: {
       favicon: "./assets/favicon.png"

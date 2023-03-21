@@ -5,8 +5,8 @@ const linking = {
   prefixes: [
     Linking.createURL("/"),
     "rnefeatures://",
-    "https://johnchang.me",
-    "https://*.johnchang.me",
+    "https://obdeeplink.netlify.app",
+    "https://*.obdeeplink.netlify.app",
   ],
   config: {
     screens: {

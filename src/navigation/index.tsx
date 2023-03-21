@@ -26,7 +26,7 @@ export default function Navigation() {
         ref={navigationRef}
         fallback={<Text>Loading...</Text>}
       >
-        <Stack.Navigator initialRouteName="Root">
+        <Stack.Navigator>
           <Stack.Screen
             name="Root"
             component={BottomTabNavigator}
