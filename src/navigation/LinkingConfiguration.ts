@@ -16,7 +16,7 @@ const linking = {
               HomeStack: {
                 screens: {
                   HomeScreen: "HomeScreen",
-                  ProDetails: "pro/:proId",
+                  ProDetails: "ProDetails",
                 },
               },
             },

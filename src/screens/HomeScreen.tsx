@@ -21,7 +21,7 @@ export default function HomeScreen({ navigation }: any) {
     const body = {
       dynamicLinkInfo: {
         domainUriPrefix: "https://onebooklink.page.link",
-        link: "https://onebook-deep-link.web.app/pro/123",
+        link: "https://onebook-deep-link.web.app/ProDetails?proId=123f3j93",
         androidInfo: {
           androidPackageName: "com.rnefeatures.dev",
         },
