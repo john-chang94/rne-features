@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, Alert } from "react-native";
+import { StyleSheet, Text, View, Alert, Share, Button } from "react-native";
 import { useState, useEffect } from "react";
 import * as Linking from "expo-linking";
+import axios from "axios";
 
 export default function HomeScreen({ navigation }: any) {
   const [initialUrl, setInitialUrl] = useState<string | null>(null);
@@ -11,9 +12,46 @@ export default function HomeScreen({ navigation }: any) {
     if (path && queryParams) {
       console.log("HOME NAV RAN");
       // setTimeout(() => {
-        navigation.navigate(path, queryParams);
+      navigation.navigate(path, queryParams);
       // }, 250);
     }
+  };
+
+  const handleShare = async () => {
+    const body = {
+      dynamicLinkInfo: {
+        domainUriPrefix: "https://onebooklink.page.link",
+        link: "https://onebooklink.page.link/pro/123",
+        androidInfo: {
+          androidPackageName: "com.rnefeatures.dev",
+        },
+        iosInfo: {
+          iosBundleId: "com.rnefeatures.dev",
+        }
+      },
+    };
+    const link = await axios.post(
+      "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=AIzaSyAIiqf_Z51z8MIhU23Si8nE7JYmKUfSDBQ",
+      body
+    );
+
+    try {
+      const result = await Share.share({
+        message: `Check out my profile! \n${link.data.shortLink}`,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error);
+    }
+    console.log(JSON.stringify(link, null, 2));
   };
 
   useEffect(() => {
@@ -42,6 +80,7 @@ export default function HomeScreen({ navigation }: any) {
 
   return (
     <View style={styles.container}>
+      <Button title="SHARE" onPress={handleShare} />
       <Text style={{ marginVertical: 10 }}>Home</Text>
       <Text style={{ marginVertical: 10 }}>INITIAL URL: {initialUrl}</Text>
       <Text style={{ marginVertical: 10 }}>PARSED URL: {parsedUrl}</Text>

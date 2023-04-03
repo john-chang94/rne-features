@@ -5,8 +5,7 @@ const linking = {
   prefixes: [
     Linking.createURL("/"),
     "rnefeatures://",
-    "https://obdeeplink.netlify.app",
-    "https://*.obdeeplink.netlify.app",
+    "https://onebook-deep-link.web.app",
   ],
   config: {
     screens: {
@@ -17,7 +16,7 @@ const linking = {
               HomeStack: {
                 screens: {
                   HomeScreen: "HomeScreen",
-                  ProDetails: "ProDetails",
+                  ProDetails: "pro/:proId",
                 },
               },
             },

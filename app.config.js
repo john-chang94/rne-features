@@ -18,7 +18,7 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: "com.rnefeatures.dev",
-      associatedDomains: ["applinks:obdeeplink.netlify.app"],
+      associatedDomains: ["applinks:onebook-deep-link.web.app"],
     },
     android: {
       adaptiveIcon: {
@@ -33,17 +33,14 @@ export default {
           data: [
             {
               scheme: "https",
-              host: "*obdeeplink.netlify.app",
-            },
-            {
-              scheme: "https",
-              host: "*.obdeeplink.netlify.app",
-            },
+              host: "onebook-deep-link.web.app",
+              pathPrefix: "/"
+            }
           ],
           category: ["BROWSABLE", "DEFAULT"],
         },
       ],
-      versionCode: 19,
+      versionCode: 20,
     },
     web: {
       favicon: "./assets/favicon.png"

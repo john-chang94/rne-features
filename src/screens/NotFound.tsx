@@ -18,20 +18,19 @@ export default function NotFound({ navigation }: any) {
     navigation.replace("Root");
   };
 
-  // const handleDeepLink = async (url: any) => {
-  //   setParsedUrl((prev: any) => [
-  //     ...prev,
-  //     JSON.stringify(Linking.parse(url), null, 2),
-  //   ]);
-  //   const { path, queryParams } = Linking.parse(url);
-  //   if (path && queryParams) {
-  //     console.log("NOT FOUND NAV RAN");
-  //     // setTimeout(() => {
-  //     setIsLoading(false);
-  //     navigation.navigate("Home", { screen: path, params: queryParams });
-  //     // }, 500);
-  //   }
-  // };
+  const handleDeepLink = async (url: any) => {
+    setParsedUrl((prev: any) => [
+      ...prev,
+      JSON.stringify(Linking.parse(url), null, 2),
+    ]);
+    // const { path, queryParams } = Linking.parse(url);
+    setIsLoading(false);
+    // if (path && queryParams) {
+    //   console.log("NOT FOUND NAV RAN");
+    //   setIsLoading(false);
+    //   navigation.navigate("Home", { screen: path, params: queryParams });
+    // }
+  };
 
   useEffect(() => {
     (async () => {
@@ -39,9 +38,9 @@ export default function NotFound({ navigation }: any) {
       if (init !== null) {
         setInitialUrl((prev: any) => [...prev, init]);
         setTimeout(() => {
-          // handleDeepLink(init);
+          handleDeepLink(init);
           setIsLoading(false);
-          navigation.replace("Root");
+          // navigation.replace("Root");
         }, 150);
       } else {
         setIsLoading(false);
@@ -49,17 +48,17 @@ export default function NotFound({ navigation }: any) {
     })();
   }, []);
 
-  // useEffect(() => {
-  //   const subscription = Linking.addEventListener("url", (e) => {
-  //     setTimeout(() => {
-  //       handleDeepLink(e.url);
-  //     }, 500);
-  //   });
+  useEffect(() => {
+    const subscription = Linking.addEventListener("url", (e) => {
+      setTimeout(() => {
+        handleDeepLink(e.url);
+      }, 500);
+    });
 
-  //   return () => {
-  //     subscription.remove();
-  //   };
-  // }, []);
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   if (isLoading)
     return (
