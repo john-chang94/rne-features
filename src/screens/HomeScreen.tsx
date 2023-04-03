@@ -31,7 +31,7 @@ export default function HomeScreen({ navigation }: any) {
       },
     };
     const link = await axios.post(
-      "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=AIzaSyAIiqf_Z51z8MIhU23Si8nE7JYmKUfSDBQ",
+      `https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${process.env.FIREBASE_WEB_API_KEY}`,
       body
     );
 

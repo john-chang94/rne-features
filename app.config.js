@@ -49,7 +49,8 @@ export default {
     extra: {
       eas: {
         projectId: "7501daf5-7ba4-481c-adde-f05ffa3c32cb"
-      }
+      },
+      firebaseWebApiKey: process.env.FIREBASE_WEB_API_KEY
     },
     plugins: [
       [
